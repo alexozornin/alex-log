@@ -1,0 +1,17 @@
+{
+  "name": "alex-log",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Ozornin",
+  "license": "ISC",
+  "dependencies": {
+    "pino": "^4.10.0"
+  }
+}
