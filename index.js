@@ -45,11 +45,16 @@ class Logger
     {
         if (this.console)
         {
-            console.log('===Error===\n' + msg + '\n===');
+            console.log('===Error===\n' + msg + '\n' + msg.trace + '\n===');
+        }
+        let obj = { type: 'error', utc_time: (new Date()).toUTCString() };
+        if (msg.trace)
+        {
+            obj.trace = msg.trace;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.error({type: 'error', utc_time: (new Date()).toUTCString()}, msg);
+            this.streams[key].logger.error(obj, msg);
         }
     }
 
@@ -57,11 +62,16 @@ class Logger
     {
         if (this.console)
         {
-            console.log('===Fatal===\n' + msg + '\n===');
+            console.log('===Fatal===\n' + msg + '\n' + msg.trace + '\n===');
+        }
+        let obj = { type: 'fatal', utc_time: (new Date()).toUTCString() };
+        if (msg.trace)
+        {
+            obj.trace = msg.trace;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.fatal({type: 'fatal', utc_time: (new Date()).toUTCString()}, msg);
+            this.streams[key].logger.fatal(obj, msg);
         }
     }
 
@@ -71,9 +81,10 @@ class Logger
         {
             console.log('===Info===\n' + msg + '\n===');
         }
+        let obj = { type: 'info', utc_time: (new Date()).toUTCString() };
         for (let key in this.streams)
         {
-            this.streams[key].logger.info({type: 'info', utc_time: (new Date()).toUTCString()}, msg);
+            this.streams[key].logger.info(obj, msg);
         }
     }
 
@@ -83,9 +94,10 @@ class Logger
         {
             console.log('===Trace===\n' + msg + '\n===');
         }
+        let obj = { type: 'trace', utc_time: (new Date()).toUTCString() };
         for (let key in this.streams)
         {
-            this.streams[key].logger.trace({type: 'trace', utc_time: (new Date()).toUTCString()}, msg);
+            this.streams[key].logger.trace(obj, msg);
         }
     }
 
@@ -93,11 +105,16 @@ class Logger
     {
         if (this.console)
         {
-            console.log('===Warning===\n' + msg + '\n===');
+            console.log('===Fatal===\n' + msg + '\n' + msg.trace + '\n===');
+        }
+        let obj = { type: 'warning', utc_time: (new Date()).toUTCString() };
+        if (msg.trace)
+        {
+            obj.trace = msg.trace;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.warn({type: 'warning', utc_time: (new Date()).toUTCString()}, msg);
+            this.streams[key].logger.warn(obj, msg);
         }
     }
 }
