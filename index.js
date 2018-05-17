@@ -41,80 +41,155 @@ class Logger
         delete this.streams[stream_name];
     }
 
-    log_error(msg)
+    log_error(input, comment)
     {
         if (this.console)
         {
-            console.log('===Error===\n' + msg + '\nTrace ' + msg.stack + '\n===');
+            let log = '===Error===\n';
+            if (comment)
+            {
+                log += comment + '\n';
+            }
+            log += input + '\n';
+            if (input.stack)
+            {
+                log += 'Stack ' + input.stack + '\n'
+            }
+            log += '===';
+            console.log(log);
         }
         let obj = { type: 'error', utc_time: (new Date()).toUTCString() };
-        if (msg.stack)
+        if (comment)
         {
-            obj.stack = msg.stack;
+            obj.comment = comment;
+        }
+        if (input.stack)
+        {
+            obj.stack = input.stack;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.error(obj, msg);
+            this.streams[key].logger.error(obj, input);
         }
     }
 
-    log_fatal(msg)
+    log_fatal(input, comment)
     {
         if (this.console)
         {
-            console.log('===Fatal===\n' + msg + '\nTrace ' + msg.stack + '\n===');
+            let log = '===Fatal===\n';
+            if (comment)
+            {
+                log += comment + '\n';
+            }
+            log += input + '\n';
+            if (input.stack)
+            {
+                log += 'Stack ' + input.stack + '\n'
+            }
+            log += '===';
+            console.log(log);
         }
         let obj = { type: 'fatal', utc_time: (new Date()).toUTCString() };
-        if (msg.stack)
+        if (comment)
         {
-            obj.stack = msg.stack;
+            obj.comment = comment;
+        }
+        if (input.stack)
+        {
+            obj.stack = input.stack;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.fatal(obj, msg);
+            this.streams[key].logger.fatal(obj, input);
         }
     }
 
-    log_info(msg)
+    log_info(input, comment)
     {
         if (this.console)
         {
-            console.log('===Info===\n' + msg + '\n===');
+            let log = '===Info===\n';
+            if (comment)
+            {
+                log += comment + '\n';
+            }
+            log += input + '\n';
+            if (input.stack)
+            {
+                log += 'Stack ' + input.stack + '\n'
+            }
+            log += '===';
+            console.log(log);
         }
         let obj = { type: 'info', utc_time: (new Date()).toUTCString() };
+        if (comment)
+        {
+            obj.comment = comment;
+        }
         for (let key in this.streams)
         {
-            this.streams[key].logger.info(obj, msg);
+            this.streams[key].logger.info(obj, input);
         }
     }
 
-    log_trace(msg)
+    log_trace(input, comment)
     {
         if (this.console)
         {
-            console.log('===Trace===\n' + msg + '\n===');
+            let log = '===Trace===\n';
+            if (comment)
+            {
+                log += comment + '\n';
+            }
+            log += input + '\n';
+            if (input.stack)
+            {
+                log += 'Stack ' + input.stack + '\n'
+            }
+            log += '===';
+            console.log(log);
         }
         let obj = { type: 'trace', utc_time: (new Date()).toUTCString() };
+        if (comment)
+        {
+            obj.comment = comment;
+        }
         for (let key in this.streams)
         {
-            this.streams[key].logger.trace(obj, msg);
+            this.streams[key].logger.trace(obj, input);
         }
     }
 
-    log_warn(msg)
+    log_warn(input, comment)
     {
         if (this.console)
         {
-            console.log('===Fatal===\n' + msg + '\nTrace ' + msg.stack + '\n===');
+            let log = '===Warn===\n';
+            if (comment)
+            {
+                log += comment + '\n';
+            }
+            log += input + '\n';
+            if (input.stack)
+            {
+                log += 'Stack ' + input.stack + '\n'
+            }
+            log += '===';
+            console.log(log);
         }
         let obj = { type: 'warning', utc_time: (new Date()).toUTCString() };
-        if (msg.stack)
+        if (comment)
         {
-            obj.stack = msg.stack;
+            obj.comment = comment;
+        }
+        if (input.stack)
+        {
+            obj.stack = input.stack;
         }
         for (let key in this.streams)
         {
-            this.streams[key].logger.warn(obj, msg);
+            this.streams[key].logger.warn(obj, input);
         }
     }
 }
